@@ -53,6 +53,10 @@ def main(argv):
                               help='Expected string in the output')
             argp.add_argument('--command', type=str, default='fpf',
                               help='sea command')
+            argp.add_argument ('--path-bmc',
+                               help='Use Path-BMC engine. Default value=none',
+                               choices=['none', 'path', 'lookahead-path'],
+                               dest='path_bmc', default='none')
             argp.add_argument('--cex', action='store_true', default=False,
                               help='Counterexample mode')
             argp.add_argument('--vac', action='store_true', default=False,
@@ -89,29 +93,40 @@ def main(argv):
             cmd = [os.path.join(SEAHORN_ROOT, 'bin', 'sea'),
                    'yama', '--yforce']
 
-            # base config
-            base_config = os.path.join(script_dir, 'seahorn', 'sea.yaml')
-            if args.cex:
-                base_config = os.path.join(script_dir, 'seahorn',
-                                           'sea.cex.yaml')
-            cmd.extend(['-y', base_config])
+            if args.path_bmc != 'none':
+                base_config = os.path.join(script_dir, 'seahorn', 'sea_base_path.yaml')
+                cmd.extend(['-y', base_config])
+                if args.path_bmc == 'path':
+                    path_config = os.path.join(script_dir, 'seahorn', 'sea_path.yaml')
+                    cmd.extend(['-y', path_config])
+                else:
+                    lookahead_config = os.path.join(script_dir, 'seahorn', 'sea_lookahead_path.yaml')
+                    cmd.extend(['-y', lookahead_config])
+            else:
+                # base config                
+                base_config = os.path.join(script_dir, 'seahorn', 'sea.yaml')
+                if args.cex:
+                    base_config = os.path.join(script_dir, 'seahorn',
+                                               'sea.cex.yaml')
+                cmd.extend(['-y', base_config])
 
-            # vacuity config
-            if args.vac:
-                vac_config = os.path.join(script_dir, 'seahorn',
-                                          'sea.vac.yaml')
-                cmd.extend(['-y', vac_config])
+                # vacuity config
+                if args.vac:
+                    vac_config = os.path.join(script_dir, 'seahorn',
+                                              'sea.vac.yaml')
+                    cmd.extend(['-y', vac_config])
 
-            # pcond config
-            if args.pcond:
-                pcond_config = os.path.join(script_dir, 'seahorn',
-                                            'sea.pcond.yaml')
-                cmd.extend(['-y', pcond_config])
+                # pcond config
+                if args.pcond:
+                    pcond_config = os.path.join(script_dir, 'seahorn',
+                                                'sea.pcond.yaml')
+                    cmd.extend(['-y', pcond_config])
 
-            # job specific config
-            job_config = os.path.abspath(os.path.join(file_dir, '..', '..',
-                                                      'sea.yaml'))
-            cmd.extend(['-y', job_config])
+                # job specific config
+                job_config = os.path.abspath(os.path.join(file_dir, '..', '..',
+                                                          'sea.yaml'))
+                cmd.extend(['-y', job_config])
+                
 
             if args.dry_run:
                 cmd.append('--dry-run')

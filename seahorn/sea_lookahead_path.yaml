@@ -1,0 +1,19 @@
+verify_options:
+## bmc engine
+  bmc: lookahead-path
+## path-bmc-specific options
+  horn-bmc-smt-solver: y2  
+  horn-bmc-crab-invariants: false
+  horn-bmc-crab: true
+  horn-bmc-crab-dom: int
+  horn-bmc-muc: assume
+  ## Ignored by y2
+  horn-bmc-path-timeout: 20
+  horn-bmc-muc-timeout: 5
+## lookahead specific options  
+  horn-lookahead-safe-subsumptions: true
+  horn-lookahead-unsafe-subsumptions: true
+  horn-lookahead-splits: 3
+  horn-lookahead-split-strategy: hybrid
+## Logging messages  
+  log : 'bmc-lookahead:bmc'

@@ -339,6 +339,7 @@ separate_arguments(VERIFY_FLAGS)
 function(sea_add_unsat_test TARGET)
   sea_get_file_name(BC ${TARGET}.ir)
   add_test(NAME "${TARGET}_unsat_test" COMMAND ${VERIFY_CMD} ${VERIFY_FLAGS} --expect=unsat ${BC})
+  add_test(NAME "${TARGET}_unsat_test_PATH-BMC" COMMAND ${VERIFY_CMD} --path-bmc=path ${VERIFY_FLAGS} --expect=unsat ${BC})  
 endfunction()
 
 set(FUZZ_FLAGS corpus -use_value_profile=1 -detect_leaks=0 -runs=50000 -timeout=60 -rss_limit_mb=4096 CACHE STRING "Flags for fuzzing")
@@ -388,6 +389,9 @@ configure_file(sea.yaml sea.yaml @ONLY)
 configure_file(sea_cex_base.yaml sea.cex.yaml @ONLY)
 configure_file(sea_vac.yaml sea.vac.yaml @ONLY)
 configure_file(sea_pcond.yaml sea.pcond.yaml @ONLY)
+configure_file(sea_base_path.yaml sea_base_path.yaml @ONLY)
+configure_file(sea_path.yaml sea_path.yaml @ONLY)
+configure_file(sea_lookahead_path.yaml sea_lookahead_path.yaml @ONLY)
 
 # compilation recipes for aws-c-common library
 add_subdirectory(aws-c-common-stubs)
