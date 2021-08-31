@@ -101,7 +101,7 @@ def main(argv):
                     cmd.extend(['-y', path_config])
                 else:
                     lookahead_config = os.path.join(script_dir, 'seahorn', 'sea_lookahead_path.yaml')
-                    cmd.extend(['-y', lookahead_config])
+                    cmd.extend(['-y', lookahead_config])                    
             else:
                 # base config                
                 base_config = os.path.join(script_dir, 'seahorn', 'sea.yaml')
@@ -122,11 +122,12 @@ def main(argv):
                                                 'sea.pcond.yaml')
                     cmd.extend(['-y', pcond_config])
 
-                # job specific config
-                job_config = os.path.abspath(os.path.join(file_dir, '..', '..',
-                                                          'sea.yaml'))
-                cmd.extend(['-y', job_config])
-                
+
+            # job specific config
+            job_config = os.path.abspath(os.path.join(file_dir, '..', '..',
+                                                      'sea.yaml'))
+            cmd.extend(['-y', job_config])
+                    
 
             if args.dry_run:
                 cmd.append('--dry-run')
