@@ -33,9 +33,10 @@ verify_options:
   ## FIXME: this option does not seem to go to the seahorn command
   lower-gv-init-struct: false
   horn-shadow-mem-alloc-is-def: ''
+  horn-opsem-ignore-alignment: true  
 ## vcgen options
   horn-at-most-one-predecessor: ''
-  #horn-vcgen-use-ite: ''
+  horn-vcgen-use-ite: ''
   #horn-vcgen-only-dataflow: true
   #horn-bmc-coi: true
 # static allocator supports symbolic allocation size
@@ -43,9 +44,9 @@ verify_options:
 # stack allocation from a symbolic starting point
   horn-explicit-sp0: false
 # lambdas for memory
-  #horn-bv2-lambdas: ''
+  horn-bv2-lambdas: ''
 # use z3 simplifier during vcgen
-  #horn-bv2-simplify: true
+  horn-bv2-simplify: true
 # wide memory manager to track pointer sizes
   horn-bv2-extra-widemem: ''
 ## intermediate results in human readable form for debugging

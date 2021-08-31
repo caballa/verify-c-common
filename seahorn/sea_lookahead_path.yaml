@@ -8,8 +8,8 @@ verify_options:
   horn-bmc-crab-dom: int
   horn-bmc-muc: assume
   ## Ignored by y2
-  horn-bmc-path-timeout: 20
-  horn-bmc-muc-timeout: 5
+  #horn-bmc-path-timeout: 20
+  #horn-bmc-muc-timeout: 5
 ## lookahead specific options  
   horn-lookahead-safe-subsumptions: true
   horn-lookahead-unsafe-subsumptions: true
