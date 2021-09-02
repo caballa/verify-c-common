@@ -241,7 +241,10 @@ macro(sea_add_fuzz_executable name)
 endmacro()
 
 function(sea_attach_bc_link name)
-  sea_link_libraries(${name} sea_proofs.ir sea_bounds.ir str_proofs.ir)
+    sea_link_libraries(${name} sea_proofs.ir sea_bounds.ir str_proofs.ir)
+    if (NOT SEA_ENABLE_OPSEM2)  
+      sea_link_libraries(${name} sea_path_bmc_proofs.ir)    
+    endif()
   sea_attach_bc(${name})
 endfunction()
 
