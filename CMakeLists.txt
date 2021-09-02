@@ -12,6 +12,7 @@ enable_testing()
 # check for memory safety and call builtin functions directly.
 option(SEA_LLVM_MEM_BUILTINS "Use LLVM builtins memcpy/memmove without memory safety checks" OFF)
 
+option(SEA_ENABLE_OPSEM2 "Enable SeaHorn with --bmc=opsem2" ON)
 
 option(SEA_ENABLE_FUZZ "Enable fuzzing" OFF)
 option(SEA_WITH_BLEEDING_EDGE "Enable bleeding edge proofs" OFF)

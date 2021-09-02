@@ -5,6 +5,7 @@ add_executable(
 )
 sea_attach_bc_link(ring_buffer_init)
 sea_add_unsat_test(ring_buffer_init)
+sea_add_path_bmc_unsat_test(ring_buffer_init)
 
 # klee
 sea_add_klee(

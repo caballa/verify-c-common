@@ -8,6 +8,7 @@ add_executable(
 sea_attach_bc_link(string_new_from_c_str)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(string_new_from_c_str)
+sea_add_path_bmc_unsat_test(string_new_from_c_str)
 
 # klee
 sea_add_klee(

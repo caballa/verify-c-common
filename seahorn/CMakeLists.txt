@@ -336,10 +336,18 @@ endmacro()
 set(VERIFY_FLAGS $ENV{VERIFY_FLAGS} CACHE STRING "Flags for verify script")
 separate_arguments(VERIFY_FLAGS)
 
+# use of bmc=opsem2
 function(sea_add_unsat_test TARGET)
+  if (SEA_ENABLE_OPSEM2)
+    sea_get_file_name(BC ${TARGET}.ir)
+    add_test(NAME "${TARGET}_unsat_test" COMMAND ${VERIFY_CMD} ${VERIFY_FLAGS} --expect=unsat ${BC})
+  endif()
+endfunction()
+
+# use of bmc=path
+function(sea_add_path_bmc_unsat_test TARGET)
   sea_get_file_name(BC ${TARGET}.ir)
-  add_test(NAME "${TARGET}_unsat_test" COMMAND ${VERIFY_CMD} ${VERIFY_FLAGS} --expect=unsat ${BC})
-  add_test(NAME "${TARGET}_unsat_test_PATH-BMC" COMMAND ${VERIFY_CMD} --path-bmc=path ${VERIFY_FLAGS} --expect=unsat ${BC})  
+  add_test(NAME "${TARGET}_PATH-BMC_unsat_test" COMMAND ${VERIFY_CMD} --path-bmc=path ${VERIFY_FLAGS} --expect=unsat ${BC})  
 endfunction()
 
 set(FUZZ_FLAGS corpus -use_value_profile=1 -detect_leaks=0 -runs=50000 -timeout=60 -rss_limit_mb=4096 CACHE STRING "Flags for fuzzing")

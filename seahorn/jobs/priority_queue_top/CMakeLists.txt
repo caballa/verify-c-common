@@ -4,6 +4,7 @@ add_executable(priority_queue_top
   aws_priority_queue_top_harness.c)
 sea_attach_bc_link(priority_queue_top)
 sea_add_unsat_test(priority_queue_top)
+sea_add_path_bmc_unsat_test(priority_queue_top)
 
 # klee
 sea_add_klee(priority_queue_top

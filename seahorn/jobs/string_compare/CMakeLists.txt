@@ -7,6 +7,7 @@ add_executable(
 )
 sea_attach_bc_link(string_compare)
 sea_add_unsat_test(string_compare)
+sea_add_path_bmc_unsat_test(string_compare)
 
 # klee
 sea_add_klee(

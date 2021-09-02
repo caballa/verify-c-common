@@ -6,6 +6,7 @@ add_executable(
 )
 sea_attach_bc_link(priority_queue_size)
 sea_add_unsat_test(priority_queue_size)
+sea_add_path_bmc_unsat_test(priority_queue_size)
 
 # klee
 sea_add_klee(

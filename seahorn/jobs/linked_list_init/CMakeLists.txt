@@ -6,6 +6,7 @@ target_compile_definitions(linked_list_init
   PUBLIC SEA_DEEP_CHECKS=0)
 sea_attach_bc_link(linked_list_init)
 sea_add_unsat_test(linked_list_init)
+sea_add_path_bmc_unsat_test(linked_list_init)
 
 # klee
 sea_add_klee(linked_list_init

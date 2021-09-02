@@ -5,6 +5,7 @@ sea_overlink_libraries(byte_cursor_read_and_fill_buffer byte_cursor_advance_nosp
 sea_attach_bc_link(byte_cursor_read_and_fill_buffer)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(byte_cursor_read_and_fill_buffer)
+sea_add_path_bmc_unsat_test(byte_cursor_read_and_fill_buffer)
 
 # fuzz
 sea_add_fuzz(byte_cursor_read_and_fill_buffer

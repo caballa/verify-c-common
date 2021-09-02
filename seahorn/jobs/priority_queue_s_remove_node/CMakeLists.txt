@@ -8,6 +8,7 @@ sea_overlink_libraries(priority_queue_s_remove_node sift_either_override.ir)
 sea_attach_bc_link(priority_queue_s_remove_node)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(priority_queue_s_remove_node)
+sea_add_path_bmc_unsat_test(priority_queue_s_remove_node)
 
 # klee
 sea_add_klee(priority_queue_s_remove_node

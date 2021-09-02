@@ -10,6 +10,7 @@ sea_overlink_libraries(hash_iter_begin hash_table_state_is_valid_override.ir)
 sea_attach_bc_link(hash_iter_begin)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(hash_iter_begin)
+sea_add_path_bmc_unsat_test(hash_iter_begin)
 
 # klee
 sea_add_klee(hash_iter_begin

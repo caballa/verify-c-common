@@ -4,6 +4,7 @@ add_executable(array_list_swap
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_attach_bc_link(array_list_swap)
 sea_add_unsat_test(array_list_swap)
+sea_add_path_bmc_unsat_test(array_list_swap)
 
 # klee
 sea_add_klee(array_list_swap ${AWS_C_COMMON_ROOT}/source/array_list.c

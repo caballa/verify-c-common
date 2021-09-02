@@ -3,6 +3,7 @@ add_executable(ptr_eq
   aws_ptr_eq_harness.c)
 sea_attach_bc_link(ptr_eq)
 sea_add_unsat_test(ptr_eq)
+sea_add_path_bmc_unsat_test(ptr_eq)
 
 # klee
 sea_add_klee(ptr_eq

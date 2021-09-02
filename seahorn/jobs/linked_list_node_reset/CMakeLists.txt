@@ -3,6 +3,7 @@ add_executable(linked_list_node_reset
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_attach_bc_link(linked_list_node_reset)
 sea_add_unsat_test(linked_list_node_reset)
+sea_add_path_bmc_unsat_test(linked_list_node_reset)
 
 # klee
 sea_add_klee(linked_list_node_reset

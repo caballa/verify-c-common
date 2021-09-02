@@ -9,6 +9,7 @@ sea_overlink_libraries(hash_table_init_bounded hash_table_state_is_valid_overrid
 sea_attach_bc_link(hash_table_init_bounded)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(hash_table_init_bounded)
+sea_add_path_bmc_unsat_test(hash_table_init_bounded)
 
 # klee
 sea_add_klee(hash_table_init_bounded

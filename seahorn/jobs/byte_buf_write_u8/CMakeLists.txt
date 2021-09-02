@@ -3,6 +3,7 @@ add_executable(byte_buf_write_u8
   aws_byte_buf_write_u8_harness.c)
 sea_attach_bc_link(byte_buf_write_u8)
 sea_add_unsat_test(byte_buf_write_u8)
+sea_add_path_bmc_unsat_test(byte_buf_write_u8)
 
 # klee
 sea_add_klee(byte_buf_write_u8

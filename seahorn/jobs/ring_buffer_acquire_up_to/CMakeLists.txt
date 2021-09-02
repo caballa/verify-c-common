@@ -7,6 +7,7 @@ add_executable(
 sea_attach_bc_link(ring_buffer_acquire_up_to)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(ring_buffer_acquire_up_to)
+sea_add_path_bmc_unsat_test(ring_buffer_acquire_up_to)
 
 # klee
 sea_add_klee(

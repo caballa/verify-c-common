@@ -9,6 +9,7 @@ sea_overlink_libraries(hash_table_foreach_deep_precise hash_table_state_is_valid
 sea_attach_bc_link(hash_table_foreach_deep_precise)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(hash_table_foreach_deep_precise)
+sea_add_path_bmc_unsat_test(hash_table_foreach_deep_precise)
 
 # smack
 sea_add_smack(hash_table_foreach_deep_precise

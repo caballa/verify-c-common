@@ -8,6 +8,7 @@ sea_link_libraries(hash_iter_done hash_table.opt.ir)
 sea_overlink_libraries(hash_iter_done hash_table_state_is_valid_override.ir)
 sea_attach_bc_link(hash_iter_done)
 sea_add_unsat_test(hash_iter_done)
+sea_add_path_bmc_unsat_test(hash_iter_done)
 
 # klee
 sea_add_klee(hash_iter_done

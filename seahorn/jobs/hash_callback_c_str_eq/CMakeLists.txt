@@ -7,6 +7,7 @@ add_executable(hash_callback_c_str_eq
 sea_attach_bc_link(hash_callback_c_str_eq)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(hash_callback_c_str_eq)
+sea_add_path_bmc_unsat_test(hash_callback_c_str_eq)
 
 # klee
 sea_add_klee(hash_callback_c_str_eq

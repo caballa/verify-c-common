@@ -3,6 +3,7 @@ add_executable(hash_ptr
   aws_hash_ptr_harness.c)
 sea_attach_bc_link(hash_ptr)
 sea_add_unsat_test(hash_ptr)
+sea_add_path_bmc_unsat_test(hash_ptr)
 
 # klee
 sea_add_klee(hash_ptr

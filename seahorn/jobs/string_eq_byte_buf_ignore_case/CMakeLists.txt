@@ -8,6 +8,7 @@ add_executable(
 sea_attach_bc_link(string_eq_byte_buf_ignore_case)
 configure_file(sea.yaml sea.yaml @ONLY)
 sea_add_unsat_test(string_eq_byte_buf_ignore_case)
+sea_add_path_bmc_unsat_test(string_eq_byte_buf_ignore_case)
 
 # klee
 sea_add_klee(

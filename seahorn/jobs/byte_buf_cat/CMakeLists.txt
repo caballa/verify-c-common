@@ -3,6 +3,7 @@ add_executable(byte_buf_cat
   aws_byte_buf_cat_harness.c)
 sea_attach_bc_link(byte_buf_cat)
 sea_add_unsat_test(byte_buf_cat)
+sea_add_path_bmc_unsat_test(byte_buf_cat)
 
 # klee
 # Klee will get timeout on this test

@@ -7,6 +7,7 @@ sea_link_libraries(priority_queue_pop priority_queue.opt.ir)
 sea_overlink_libraries(priority_queue_pop remove_node_override.ir)
 sea_attach_bc_link(priority_queue_pop)
 sea_add_unsat_test(priority_queue_pop)
+sea_add_path_bmc_unsat_test(priority_queue_pop)
 
 # klee
 if(SEA_ENABLE_KLEE)

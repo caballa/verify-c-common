@@ -7,6 +7,7 @@ target_compile_definitions(linked_list_pop_front
   PUBLIC AWS_DEEP_CHECKS=0)
 sea_attach_bc_link(linked_list_pop_front)
 sea_add_unsat_test(linked_list_pop_front)
+sea_add_path_bmc_unsat_test(linked_list_pop_front)
 
 # klee
 sea_add_klee(linked_list_pop_front
