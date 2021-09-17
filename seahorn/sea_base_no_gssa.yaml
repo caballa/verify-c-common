@@ -11,7 +11,7 @@ verify_options:
   externalize-addr-taken-functions: ''
   no-kill-vaarg: ''
   with-arith-overflow: true
-  horn-unify-assumes: true
+  horn-unify-assumes: false
 #  horn-gsa: ''
 # do not instrument library functions with memory assertions 
   no-fat-fns: 'bcmp,memcpy,assert_bytes_match,ensure_linked_list_is_allocated,sea_aws_linked_list_is_valid'
