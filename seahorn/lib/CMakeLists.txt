@@ -29,6 +29,12 @@ sea_attach_bc(sea_proofs)
 add_library(sea_path_bmc_proofs nd_clam.c)
 sea_attach_bc(sea_path_bmc_proofs)
 
+# crab proof helpers
+# if(SEA_ENABLE_CRAB)
+#   add_library(crab_proofs nd_clam.c)
+#   sea_attach_bc(crab_proofs)
+# endif()
+
 # string proof helpers
 add_library(str_proofs sea_string.cc)
 

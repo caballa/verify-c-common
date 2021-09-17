@@ -26,6 +26,8 @@ verify_options:
   horn-vcgen-only-dataflow: false
 # reduce by data dependence
   horn-bmc-coi: false
+# Use crab to prove is_deref checks
+  horn-bv2-crab-lower-is-deref: true
 # static allocator supports symbolic allocation size
   sea-opsem-allocator: static
 # stack allocation from a symbolic starting point

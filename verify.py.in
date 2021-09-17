@@ -63,6 +63,8 @@ def main(argv):
                               help='Vacuity mode')
             argp.add_argument('--pcond', action='store_true', default=False,
                               help='Path condition mode')
+            argp.add_argument('--crab', action='store_true', default=False,
+                              help='Using crab')            
             argp.add_argument('input_file', nargs=1)
             argp.add_argument('--dry-run', dest='dry_run',
                               action='store_true', default=False,
@@ -101,7 +103,10 @@ def main(argv):
                     cmd.extend(['-y', path_config])
                 else:
                     lookahead_config = os.path.join(script_dir, 'seahorn', 'sea_lookahead_path.yaml')
-                    cmd.extend(['-y', lookahead_config])                    
+                    cmd.extend(['-y', lookahead_config])
+            elif args.crab:
+                base_config = os.path.join(script_dir, 'seahorn', 'sea_base_no_gssa.yaml')
+                cmd.extend(['-y', base_config])
             else:
                 # base config                
                 base_config = os.path.join(script_dir, 'seahorn', 'sea.yaml')

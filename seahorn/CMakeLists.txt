@@ -242,9 +242,14 @@ endmacro()
 
 function(sea_attach_bc_link name)
     sea_link_libraries(${name} sea_proofs.ir sea_bounds.ir str_proofs.ir)
-    if (NOT SEA_ENABLE_OPSEM2)  
+    if (NOT SEA_ENABLE_OPSEM2)
+      ## used by crab and path-bmc
       sea_link_libraries(${name} sea_path_bmc_proofs.ir)    
     endif()
+    # if(SEA_ENABLE_CRAB)
+    #   sea_link_libraries(${name} crab_proofs.ir)
+    #   target_compile_definitions(${name} PRIVATE __CRAB__)
+    # endif()    
   sea_attach_bc(${name})
 endfunction()
 
@@ -345,6 +350,10 @@ function(sea_add_unsat_test TARGET)
     sea_get_file_name(BC ${TARGET}.ir)
     add_test(NAME "${TARGET}_unsat_test" COMMAND ${VERIFY_CMD} ${VERIFY_FLAGS} --expect=unsat ${BC})
   endif()
+  if(SEA_ENABLE_CRAB)
+    sea_get_file_name(BC ${TARGET}.ir)
+    add_test(NAME "${TARGET}_CRAB_unsat_test" COMMAND ${VERIFY_CMD} --crab ${VERIFY_FLAGS} --expect=unsat ${BC})
+  endif()      
 endfunction()
 
 # use of bmc=path
@@ -405,6 +414,7 @@ configure_file(sea_pcond.yaml sea.pcond.yaml @ONLY)
 configure_file(sea_base_path.yaml sea_base_path.yaml @ONLY)
 configure_file(sea_path.yaml sea_path.yaml @ONLY)
 configure_file(sea_lookahead_path.yaml sea_lookahead_path.yaml @ONLY)
+configure_file(sea_base_no_gssa.yaml sea_base_no_gssa.yaml @ONLY)
 
 # compilation recipes for aws-c-common library
 add_subdirectory(aws-c-common-stubs)

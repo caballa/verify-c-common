@@ -30,6 +30,7 @@ def get_output_level():
 def make_new_cmake_conf():
     use_klee = "ON" if args.klee else "OFF"
     use_bleeding_edge = "ON" if args.bleed_edge else "OFF"
+    use_crab = "ON" if args.usecrab else "OFF"    
     if args.smack_parser:
         use_smack = "ON" if args.smack else "OFF"
         smack_enable_no_mem_split = "ON" if args.mem_no_split else "OFF"
@@ -39,6 +40,7 @@ def make_new_cmake_conf():
         smack_args = ""
     return f'cmake -DSEA_LINK=llvm-link-10 -DCMAKE_C_COMPILER=clang-10\
     -DCMAKE_CXX_COMPILER=clang++-10 -DSEA_ENABLE_KLEE={use_klee} {smack_args}\
+    -DSEA_ENABLE_CRAB={use_crab}\
     -DSEA_WITH_BLEEDING_EDGE={use_bleeding_edge} -DSEAHORN_ROOT={SEAHORN_ROOT} ../ -GNinja'
 
 
@@ -94,8 +96,11 @@ def run_ctest_for_seahorn():
         print(f'Run SeaHorn with extra configs: {verify_flags} ')
         set_env = f'env VERIFY_FLAGS=\"{verify_flags}\"'
     cmake_conf = make_new_cmake_conf()
-    command_lst = ["rm -rf *", cmake_conf, "ninja",
-        f'{set_env} ctest -j{os.cpu_count()} -D ExperimentalTest -R . --timeout {args.timeout}']
+    # JN: don't remove my build directory
+    # command_lst = ["rm -rf *", cmake_conf, "ninja",
+    #     f'{set_env} ctest -j{os.cpu_count()} -D ExperimentalTest -R . --timeout {args.timeout}']
+    command_lst = [f'{set_env} ctest -j{os.cpu_count()} -D ExperimentalTest -R . --timeout {args.timeout}']
+    
     cddir = "cd " + BUILDABSPATH
     for strcmd in command_lst:
         cddir += " ; " + strcmd
@@ -174,6 +179,7 @@ if __name__ == "__main__":
         description='Present flags to decide which tool will be tested.')
     parser.add_argument('--seahorn', action='store_true', default=True)
     parser.add_argument('--klee', action='store_true', default=False)
+    parser.add_argument('--usecrab', action='store_true', default=False)    
     parser.add_argument('--bleed_edge', action='store_true', default=False)
     parser.add_argument('--debug', action='store_true', default=False)
     parser.add_argument('--timeout', type=int, default=2000,

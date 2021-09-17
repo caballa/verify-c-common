@@ -8,6 +8,8 @@ def read_brunchstat_from_log(log_file_name):
   line = log_file.readline()
   data = defaultdict(list)
   cur_test = None
+  first = False
+  second = False  
   while line:
     # look for next test
     new_test = re.search("Test: ", line)
@@ -19,6 +21,21 @@ def read_brunchstat_from_log(log_file_name):
     elif line.startswith("BRUNCH_STAT"):
       stat = line.split()
       # stat_name = " ".join(stat[1:-1])
+      if stat[1] == "crab.isderef.not.solve":
+        first = True
+      if stat[1] == "crab.isderef.solve":
+        if not first:
+          data[cur_test].append(0)
+          first = True
+        second = True
+      if stat[1] == "BMC":
+        if not first:
+          data[cur_test].append(0)
+        if not second:
+          data[cur_test].append(0)
+        first = False
+        second = False
+        
       stat_num = stat[-1]
       data[cur_test].append(stat_num)
     line = log_file.readline()
@@ -37,6 +54,8 @@ def write_brunchstat_into_csv(data, out_file):
       "bmc_time",
       "bmc_solve_time",
       "cda_time", "gssa_time",
+      "crab.isderef.not.solve",
+      "crab.isderef.solve"      
       "opsem_assert_time",
       "opsem_simp_time",
       "seahorn_total_time"])
