@@ -415,6 +415,7 @@ configure_file(sea_base_path.yaml sea_base_path.yaml @ONLY)
 configure_file(sea_path.yaml sea_path.yaml @ONLY)
 configure_file(sea_lookahead_path.yaml sea_lookahead_path.yaml @ONLY)
 configure_file(sea_base_no_gssa.yaml sea_base_no_gssa.yaml @ONLY)
+configure_file(sea_crab.yaml sea_crab.yaml @ONLY)
 
 # compilation recipes for aws-c-common library
 add_subdirectory(aws-c-common-stubs)

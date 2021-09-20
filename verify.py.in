@@ -105,7 +105,7 @@ def main(argv):
                     lookahead_config = os.path.join(script_dir, 'seahorn', 'sea_lookahead_path.yaml')
                     cmd.extend(['-y', lookahead_config])
             elif args.crab:
-                base_config = os.path.join(script_dir, 'seahorn', 'sea_base_no_gssa.yaml')
+                base_config = os.path.join(script_dir, 'seahorn', 'sea_crab.yaml')
                 cmd.extend(['-y', base_config])
             else:
                 # base config                
