@@ -95,8 +95,9 @@ def run_ctest_for_seahorn():
         verify_flags = " ".join(extra)
         print(f'Run SeaHorn with extra configs: {verify_flags} ')
         set_env = f'env VERIFY_FLAGS=\"{verify_flags}\"'
-    cmake_conf = make_new_cmake_conf()
-    # JN: don't remove my build directory
+
+    ## JN: we don't re-build SeaHorn
+    #cmake_conf = make_new_cmake_conf()
     # command_lst = ["rm -rf *", cmake_conf, "ninja",
     #     f'{set_env} ctest -j{os.cpu_count()} -D ExperimentalTest -R . --timeout {args.timeout}']
     command_lst = [f'{set_env} ctest -j{os.cpu_count()} -D ExperimentalTest -R . --timeout {args.timeout}']
@@ -179,7 +180,8 @@ if __name__ == "__main__":
         description='Present flags to decide which tool will be tested.')
     parser.add_argument('--seahorn', action='store_true', default=True)
     parser.add_argument('--klee', action='store_true', default=False)
-    parser.add_argument('--usecrab', action='store_true', default=False)    
+    parser.add_argument('--usecrab', action='store_true', default=False,
+                        help="To build verify-c-common with -DSEA_ENABLE_CRAB. We do not currently rebuild verify-c-common.")    
     parser.add_argument('--bleed_edge', action='store_true', default=False)
     parser.add_argument('--debug', action='store_true', default=False)
     parser.add_argument('--timeout', type=int, default=2000,
