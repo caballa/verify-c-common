@@ -12,8 +12,11 @@ struct aws_string *ensure_string_is_allocated(size_t len) {
 
   if (str) {
     /* Fields are declared const, so we need to copy them in like this */
-    *(struct aws_allocator **)(&str->allocator) =
-        nd_bool() ? sea_allocator() : NULL;
+    //*(struct aws_allocator **)(&str->allocator) =
+    //   nd_bool() ? sea_allocator() : NULL;
+    
+    // The allocator does not fail (added by JN for crab)
+    *(struct aws_allocator **)(&str->allocator) = sea_allocator();
     *(size_t *)(&str->len) = len;
     *(uint8_t *)&str->bytes[len] = '\0';
   }
@@ -22,6 +25,7 @@ struct aws_string *ensure_string_is_allocated(size_t len) {
 
 struct aws_string *ensure_string_is_allocated_bounded_length(size_t max_size) {
   size_t len = nd_size_t();
+  assume(len > 0); // exclude empty string (added by JN for crab)  
   assume(len < max_size);
   return ensure_string_is_allocated(len);
 }
