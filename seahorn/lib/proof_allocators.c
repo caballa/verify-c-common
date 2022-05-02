@@ -14,10 +14,12 @@
 void *realloc(void *ptr, size_t new_size) { return sea_realloc(ptr, new_size); }
 
 void *bounded_malloc(size_t size) {
+  __VERIFIER_assume(size >= 1); 
   return size == 0 ? NULL : sea_malloc_havoc_safe(size);
 }
 
 void *can_fail_malloc(size_t size) {
+  __VERIFIER_assume(size >= 1); 
   return size == 0 ? NULL : sea_malloc_havoc(size);
 }
 
