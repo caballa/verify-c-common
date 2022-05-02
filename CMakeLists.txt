@@ -14,7 +14,7 @@ option(SEA_LLVM_MEM_BUILTINS "Use LLVM builtins memcpy/memmove without memory sa
 
 option(SEA_ENABLE_OPSEM2 "Enable SeaHorn with --bmc=opsem2" ON)
 option(SEA_ENABLE_PATH "Enable SeaHorn with --bmc=path" ON)
-option(SEA_ENABLE_CRAB "Enable Crab" OFF)
+option(SEA_ENABLE_CRAB "Enable --bmc=opsem2 + crab" OFF)
 
 option(SEA_ENABLE_FUZZ "Enable fuzzing" OFF)
 option(SEA_WITH_BLEEDING_EDGE "Enable bleeding edge proofs" OFF)
